@@ -28,3 +28,4 @@ Ever tired in seminars when lecturer shows a slide with an URL to a website or b
 - [x] Form to modify and open the URL
 - [x] Open url in new tab
 - [ ] Multiple urls in image
+- [x] Test uploaded file was jpeg/png

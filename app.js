@@ -1,11 +1,14 @@
 var express 	= require('express');
 var http 		= require('http');
 var path 		= require('path');
+var mmm			= require('mmmagic');
 var util		= require('./util.js');
 var fs			= require('fs');
 var ocr 		= require('nodecr');
 var sys 		= require('sys');
 var exec 		= require('child_process').exec;
+var Magic 		= require('mmmagic').Magic;
+var magic 		= new Magic();
 
 var app = express();
 
@@ -15,7 +18,6 @@ app.set('view engine', 'jade');
 app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.bodyParser());
-app.use(express.methodOverride());
 app.use(express.cookieParser('pipeline'));
 app.use(express.session());
 app.use(express.compress());
@@ -42,8 +44,20 @@ app.post('/upload', function(req, res) {
 			var uploadedImage = __dirname + '/uploads/' + imageName;
 			console.log('Uploaded image: ' + uploadedImage);
 			fs.writeFile(uploadedImage, data, function(err) {
-				console.log('Redirecting user..');
-				res.redirect('/open/' + imageName);
+				magic.detectFile(uploadedImage, function(err, result) {
+					
+					if (err) console.log(err);
+					console.log('mime: ' + result);
+					if (result.indexOf('JPEG image data') === 0 || result.indexOf('PNG image data') === 0) {
+						console.log('Redirecting user..');
+						res.redirect('/open/' + imageName);	
+					} else {
+						util.removeImages();
+						res.render('index', {
+							error: 'Unsupported file type.'
+						});
+					}
+				});	
 			});
 		}
 	});
@@ -56,7 +70,7 @@ app.get('/open/:image', function(req, res) {
 	var originalImage = util.imagePath + image;
 	var tempImage = util.tempPath + "input_" + new Date().getTime() + '.tif';
 	
-	exec('convert ' + originalImage + ' -resize 200% -type Grayscale ' + tempImage, function (err, stdout, stderr) { 
+	exec('convert ' + originalImage + ' -resize 250% -type Grayscale ' + tempImage, function (err, stdout, stderr) { 
 		sys.puts(stdout);
 		ocr.process(tempImage, function(err, text) {
 			if (err) {

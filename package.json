@@ -1,11 +1,12 @@
 {
-	"name": "Seminur- Seminar URL Reader",
+	"name": "seminur",
 	"version": "1.0.0",
 	"private": true,
 	"dependencies": {
 		"express": "latest",
 		"jade": "latest",
 		"request": "latest",
-		"nodecr": "latest"
+		"nodecr": "latest",
+		"mmmagic": "latest"
 	}
 }
