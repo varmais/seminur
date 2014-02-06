@@ -8,5 +8,8 @@
 		"request": "latest",
 		"nodecr": "latest",
 		"mmmagic": "latest"
+	}, 
+	"engines": {
+		"node": "0.10.x"
 	}
 }
