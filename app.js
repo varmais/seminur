@@ -23,7 +23,9 @@ app.use(express.static(path.join(__dirname, '/public')));
 
 
 app.get('/', function(req, res) {
-	res.send(200, 'jooh');
+	res.render('index', {
+		pageTitle: 'OCR Test'
+	});
 });
 
 app.get('/test', function(req, res) {
