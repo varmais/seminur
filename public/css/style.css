@@ -1,0 +1,11 @@
+.upload-form {  
+  text-align: center;
+}
+
+.upload-form input {
+  max-width: 100%;
+}
+
+.jumbotron p {
+  font-size: 16px;
+}

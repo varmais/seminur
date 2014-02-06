@@ -1,6 +1,6 @@
 var sys 			= require('sys');
 var exec 			= require('child_process').exec;
-var imagePath 		= __dirname + '/test-images/';
+var imagePath 		= __dirname + '/uploads/';
 var tempImagePath 	= __dirname + '/temp-images/';
 
 function getUrl (text) {
@@ -8,6 +8,7 @@ function getUrl (text) {
 	var url,
 		regex = /((http|https|ftp|ftps))?\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/;
 	
+	text = text.replace(/\n/g, '');
 	console.log('text: ' + text);
 	
 	if (text.match(regex)) {
@@ -20,9 +21,13 @@ function getUrl (text) {
 	return url;
 };
 
-function cleanTempImageFolder() {
+function cleanImageFolders() {
 	exec('rm ' + tempImagePath + '*', function (err, stdout, stderr) { 
 		console.log('Removing temporary images..');
+		sys.puts(stdout);
+	});
+	exec('rm ' + imagePath + '*', function (err, stdout, stderr) { 
+		console.log('Removing uploaded images..');
 		sys.puts(stdout);
 	});
 }
@@ -30,5 +35,5 @@ function cleanTempImageFolder() {
 
 exports.imagePath = imagePath;
 exports.tempPath = tempImagePath;
-exports.removeTemp = cleanTempImageFolder;
+exports.removeImages = cleanImageFolders;
 exports.getUrl = getUrl;
