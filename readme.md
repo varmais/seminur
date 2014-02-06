@@ -1,6 +1,7 @@
-Test test something something something
+Seminurl URL Reader
 =======================================
 
+Ever tired in seminars when lecturer shows a slide with an URL to a website or blog post? With Seminurl URL Reader you can point the camera to the white screen and open the url in your mobile device.
 
 ## Install:
 
@@ -21,7 +22,8 @@ Test test something something something
 
 - [x] Test with ubuntu
 - [x] Remove images after done
-- [ ] Styles & templates etc.
-- [ ] Routes and submit and stuff
-- [ ] Capture/upload images
+- [x] Styles & templates etc.
+- [x] Routes and submit and stuff
+- [x] Capture/upload images
+- [ ] Form to modify and open the URL
 - [ ] Open url in new tab
