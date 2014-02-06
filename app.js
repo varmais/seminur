@@ -18,6 +18,7 @@ app.use(express.methodOverride());
 app.use(express.cookieParser('pipeline'));
 app.use(express.session());
 app.use(express.compress());
+app.use(express.limit('5mb'));
 app.use(app.router);
 app.use(express.static(path.join(__dirname, '/public')));
 

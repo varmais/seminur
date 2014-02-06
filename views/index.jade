@@ -12,8 +12,9 @@ html
 			div.small-2.columns
 				p jooh
 
-			div.small-2.columns
-				p eih
+				form(method='post', enctype='multipart/form-data')
+					input(type='file', accept='image/*;capture=camera').button.success
+					input(type='submit' value='Send Image!').button.success
 
 
 		div.row.footer
