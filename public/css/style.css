@@ -9,3 +9,8 @@
 .jumbotron p {
   font-size: 16px;
 }
+
+.wide-element {
+	margin: 15px 0;
+	width: 100%;
+}

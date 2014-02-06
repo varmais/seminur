@@ -1,10 +1,7 @@
 {
-	"name": "url-reader",
-	"version": "0.0.1",
+	"name": "Seminur- Seminar URL Reader",
+	"version": "1.0.0",
 	"private": true,
-	"scripts": {
-		"start": "node app.js"
-	},
 	"dependencies": {
 		"express": "latest",
 		"jade": "latest",

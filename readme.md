@@ -25,5 +25,6 @@ Ever tired in seminars when lecturer shows a slide with an URL to a website or b
 - [x] Styles & templates etc.
 - [x] Routes and submit and stuff
 - [x] Capture/upload images
-- [ ] Form to modify and open the URL
-- [ ] Open url in new tab
+- [x] Form to modify and open the URL
+- [x] Open url in new tab
+- [ ] Multiple urls in image

@@ -1,39 +1,19 @@
-doctype html
-html
-	head
-		meta(name='viewport', content='width=device-width, initial-scale=1, user-scalable=no')
-		title= pageTitle
-		link(rel="stylesheet" href="/css/normalize.css" type="text/css")
-		link(rel="stylesheet" href="/css/bootstrap.min.css" type="text/css")
-		link(rel="stylesheet" href="/css/style.css" type="text/css")
+include header
 
-	body
+div.jumbotron
+	
+	h2.text-center Seminurl URL Reader
+	
+	p.lead.text-center Ever tired in seminars when lecturer shows a slide with an URL to a website or blog post? With Seminurl URL Reader you can point the camera to the white screen and open the url in your mobile device.
+	
+	if error
+		div.error-container.alert.alert-danger
+			p.lead= error
 
-		div.container
-			div.header
-				ul.nav.nav-pills.pull-right
-					li.active
-						a(href='#') Home
-					li
-						a(href="#") Features
+	hr
+	form(method='post', action='upload', enctype='multipart/form-data').upload-form
+		input(type='file', name='image', accept='image/*;capture=camera').btn.btn-lg.btn-default.wide-element
+		hr
+		input(type='submit', value='Send Image!').btn.btn-lg.btn-default#send-button.wide-element
 
-			h3.text-muted Seminurl
-
-			div.jumbotron
-				
-				h2.text-center Seminurl URL Reader
-				
-				p.lead.text-center Ever tired in seminars when lecturer shows a slide with an URL to a website or blog post? With Seminurl URL Reader you can point the camera to the white screen and open the url in your mobile device.
-				
-				hr
-				p.lead
-					form(method='post', action='upload', enctype='multipart/form-data').upload-form
-						input(type='file', name='image', accept='image/*;capture=camera').btn.btn-lg.btn-default
-						hr
-						input(type='submit', value='Send Image!').btn.btn-lg.btn-default
-
-			div.footer
-				p.text-center (c) VarmaIS    
-
-		script(src="/js/jquery-2.1.0.min.js")
-		script(src="/js/main.js")
+include footer

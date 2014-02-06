@@ -1,0 +1,27 @@
+include header
+
+div.jumbotron
+	
+	h2.text-center Seminurl URL Reader
+	
+	if success
+		p.lead.text-center Modify the url if necessary
+	
+		hr
+
+		div.form-group.url-group
+			textarea(rows='3')#url-container.form-control= success
+			input(type='button', value='Open!').btn.btn-lg.btn-default#open-button.wide-element
+
+	if error
+
+		hr
+
+		div.text-center
+			div.alert.alert-danger
+				p.lead= error
+		
+			a(href="/").btn.btn-lg.btn-default#back-button.wide-element Back to Start
+
+
+include footer

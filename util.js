@@ -8,14 +8,14 @@ function getUrl (text) {
 	var url,
 		regex = /((http|https|ftp|ftps))?\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/;
 	
-	text = text.replace(/\n/g, '');
+	text = text.replace(/\n/g, ' ');
 	console.log('text: ' + text);
 	
 	if (text.match(regex)) {
 		url = text.match(regex)[0];
 		url = url.indexOf('"') === -1 ? url : url.substr(0, url.indexOf('"'));
 	} else {
-		url = "No URL found from the image.";
+		url = null;
 	}
 
 	return url;

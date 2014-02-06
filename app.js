@@ -19,30 +19,30 @@ app.use(express.methodOverride());
 app.use(express.cookieParser('pipeline'));
 app.use(express.session());
 app.use(express.compress());
-app.use(express.limit('5mb'));
+app.use(express.limit('2mb'));
 app.use(app.router);
 app.use(express.static(path.join(__dirname, '/public')));
 
 app.get('/', function(req, res) {
-	res.render('index', {
-		pageTitle: 'OCR Test'
-	});
+	res.render('index');
 });
 
 app.post('/upload', function(req, res) {
-
+	console.log('Getting image');
 	fs.readFile(req.files.image.path, function(err, data) {
 
 		var imageName = req.files.image.name;
 
 		if(!imageName) {
-			console.log('Error during upload.');
-			res.redirect('/');
-			res.end();
+			console.log('Error occured during upload.')
+			res.render('index', {
+				error: 'Error during upload.'
+			});			
 		} else {
 			var uploadedImage = __dirname + '/uploads/' + imageName;
-
+			console.log('Uploaded image: ' + uploadedImage);
 			fs.writeFile(uploadedImage, data, function(err) {
+				console.log('Redirecting user..');
 				res.redirect('/open/' + imageName);
 			});
 		}
@@ -56,17 +56,25 @@ app.get('/open/:image', function(req, res) {
 	var originalImage = util.imagePath + image;
 	var tempImage = util.tempPath + "input_" + new Date().getTime() + '.tif';
 	
-	exec('convert ' + originalImage + ' -resize 850% -type Grayscale ' + tempImage, function (err, stdout, stderr) { 
+	exec('convert ' + originalImage + ' -resize 200% -type Grayscale ' + tempImage, function (err, stdout, stderr) { 
 		sys.puts(stdout);
 		ocr.process(tempImage, function(err, text) {
 			if (err) {
 				console.log(err);
-				res.render('index', {
-					pageTitle: 'OCR Test',
-					errorMessage: 'Could not find the image.'
+				res.render('open', {
+					error: 'Could not find the image.'
 				});
 			} else {
-				res.send(200, util.getUrl(text));
+				var response = util.getUrl(text);
+				if(response == null) {
+					res.render('open', {
+						error: 'Could not find URL from the image.'
+					});
+				} else {
+					res.render('open', {
+						success: response
+					});	
+				}
 				util.removeImages();
 			} 
 		});
