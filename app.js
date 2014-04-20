@@ -41,7 +41,7 @@ app.post('/upload', function(req, res) {
 				error: 'Error during upload.'
 			});			
 		} else {
-			var uploadedImage = __dirname + '/uploads/' + imageName;
+			var uploadedImage = __dirname + '/tmp/uploads/' + imageName;
 			console.log('Uploaded image: ' + uploadedImage);
 			fs.writeFile(uploadedImage, data, function(err) {
 				magic.detectFile(uploadedImage, function(err, result) {

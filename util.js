@@ -1,7 +1,7 @@
 var sys 			= require('sys');
 var exec 			= require('child_process').exec;
-var imagePath 		= __dirname + '/uploads/';
-var tempImagePath 	= __dirname + '/temp-images/';
+var imagePath 		= __dirname + '/tmp/uploads/';
+var tempImagePath 	= __dirname + '/tmp/temp-images/';
 
 function getUrl (text) {
 	
